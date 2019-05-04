@@ -11,10 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.math.BigInteger;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @WebServlet("/fibonnaci")
 
@@ -57,31 +54,23 @@ public class FibonnaciApplication extends HttpServlet {
     }
 
     private static BigInteger countFibonacci(int number) {
-
-        BigInteger a = BigInteger.valueOf(1);
-        BigInteger b = BigInteger.valueOf(1);
-        BigInteger c = BigInteger.valueOf(2);
-        for (int i = 2; i <= number; i++) {
-            c = a.add(b);
-            a = b;
-            b = c;
+        if (number == 1 || number == 2) {
+            return BigInteger.ONE;
+        } else {
+            return countFibonacci(number - 1).add(countFibonacci(number - 2));
         }
-        return (a);
     }
 
     private List<BigInteger> fibonnaciString(int number) {
 
         List<BigInteger> fullString = new ArrayList<>();
-        BigInteger a = BigInteger.valueOf(1);
-        BigInteger b = BigInteger.valueOf(1);
-        BigInteger c = BigInteger.valueOf(2);
-        for (int i = 2; i <= number; i++) {
-            c = a.add(b);
-            a = b;
-            b = c;
-            fullString.add(c);
+        for (int i = 1; i <= number; i++) {
+
+            fullString.add(countFibonacci(i));
         }
+
         return fullString;
     }
 }
+
 
